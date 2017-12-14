@@ -1,7 +1,2 @@
-target
-.metadata
-.settings
-.classpath
-.project
-.idea
-*.iml
+# Node
+node_modules
