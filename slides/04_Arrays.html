@@ -31,7 +31,7 @@
         <section>
             <h2>[ Array ] Creation</h2>
             <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const empty = [];
 
                     const numbers = [1, 2, 3, 4];
@@ -47,7 +47,7 @@
                 <h2>Accessing Values</h2>
                 <p>By index</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         const array = [1, 2, 3, 4, 5];
                         const one = array[0];
                     </code>
@@ -57,7 +57,7 @@
                 <h2>Accessing Values</h2>
                 <p>Destructuring</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         const array = [1, 2, 3, 4, 5];
                         const [one, two, , ,five] = array;
 
@@ -72,7 +72,7 @@
             <section>
                 <h2>[ Arrays ] are Objects</h2>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         typeof [] // "object"
                     </code>
                 </pre>
@@ -83,7 +83,7 @@
                 <p>An Array is basically a map with index-to-value pairs. This means there is no such thing as <span
                         class="code">out of bounds</span></p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const array = ['hello', 'array'];
 
                     const arrayish = {
@@ -104,7 +104,7 @@
                 <h2>[ Arrays ] are Objects</h2>
                 <p>When setting a value at an index that would leave gaps, those gaps are "filled".</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const array = [1, 2];
                     array[3] = 4;
 
@@ -119,7 +119,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Adding a value</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2];
                     a.push(3);
 
@@ -132,7 +132,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Removing last value</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2, 3];
 
                     console.log(a.pop()); // 3
@@ -145,7 +145,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Concatenation</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2];
                     const b = [3, 4];
                     const both = a.concat(b); // [1, 2, 3, 4]
@@ -157,7 +157,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Splice</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2, 3, 4];
 
                     const spliced = a.splice(2, 2);
@@ -175,7 +175,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Slice</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2, 3, 4];
 
                     const sliced = a.slice(2, 3);
@@ -211,7 +211,7 @@
                 <h2>[ Array ] Operations</h2>
                 <h3>Finding a value</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const a = [1, 2, 3, 4];
 
                     a.indexOf(2); // 1
@@ -232,7 +232,7 @@
                 <h2>Iterating over an [ Array ]</h2>
                 <h3>Classical for-loop</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const arr = [1, 2, 3, 4];
 
                     for (let i = 0; i < arr.length; i++) {
@@ -245,7 +245,7 @@
                 <h2>Iterating over an [ Array ]</h2>
                 <h3>for-of loop</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         const arr = ['a', 'b', 'c'];
 
                         for (let value of arr) {
@@ -263,7 +263,7 @@
                 <h2>Iterating over an [ Array ]</h2>
                 <h3>foreach()</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         const arr = [a, b, c];
 
                         arr.foreach((value, index, completeArray) => {

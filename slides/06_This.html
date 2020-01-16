@@ -39,7 +39,7 @@
             <section>
                 <h2>Intention of <span class="code nobg">this</span></h2>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function hello() {
                             return `Hello ${this.name}!`;
                         }
@@ -66,7 +66,7 @@
                 <h2>Intention of <span class="code nobg">this</span></h2>
                 <p>The previous example is equivalent to this:</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function hello(context) {
                             return `Hello ${context.name}!`;
                         }
@@ -86,7 +86,7 @@
                 <h2>Confusions</h2>
                 <h3>Itself</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function countMe(number) {
                             console.log('Number:', number);
                             this.count++;
@@ -124,7 +124,7 @@
                 <h2>Confusions</h2>
                 <h3>Its scope</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function foo() {
                             let a = 'Hello';
                             this.bar();
@@ -165,7 +165,7 @@
                 <h2>Bindings</h2>
                 <h3>Default - The catch all rule</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function bindingTest() {
                             console.log(this.value);
                         }
@@ -182,7 +182,7 @@
                 <h2>Bindings</h2>
                 <h3>Implicit</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function bindingTest() {
                             console.log(this.value);
                         }
@@ -200,7 +200,7 @@
                 <h2>Bindings</h2>
                 <h3>Implicitly lost</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function bindingTest() {
                             console.log(this.value);
                         }
@@ -223,7 +223,7 @@
                 <h2>Bindings</h2>
                 <h3>Explicit</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function bindingTest() {
                             console.log(this.value);
                         }
@@ -257,7 +257,7 @@
                 <h2>Bindings</h2>
                 <h3><span class="code nobg">new</span></h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function Person() {
                             this.name = 'Nici';
                         }
@@ -277,7 +277,7 @@
                         <span class="badge es5"></span>
                     </div>
                     <pre>
-                        <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                             function Person() {
                                 this.age = 0;
 
@@ -293,7 +293,7 @@
                         <span class="badge es6"></span>
                     </div>
                     <pre>
-                        <code class="hljs javascript" data-trim contenteditable data-noescape>
+                        <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                            function Person() {
                                 this.age = 0;
 

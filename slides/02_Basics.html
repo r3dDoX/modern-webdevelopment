@@ -57,7 +57,7 @@
                     <li>And a constant type <span class="code">const</span></li>
                 </ul>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         var x = 42;
                         let y = 42; // ES6
                         const z = 42; // ES6
@@ -71,7 +71,7 @@
                 <h2>Syntax</h2>
                 <h3>Comments</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         // line comment
 
                         /*
@@ -95,7 +95,7 @@
                 <h3>Case sensitivity</h3>
                 <p>Variable names are case sensitive</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let aB = 'test';
 
                         console.log(ab);
@@ -111,7 +111,7 @@
                 <h2>Flow Control</h2>
                 <h3>If / Else</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         if (condition) {
                             doAwesomeStuff();
                         } else if (otherCondition) {
@@ -126,7 +126,7 @@
                 <h2>Flow Control</h2>
                 <h3>For</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         for (let i = 0; i < 10; i++) {
                             console.log(i);
                         }
@@ -137,7 +137,7 @@
                 <h2>Flow Control</h2>
                 <h3>While / Do ... While</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         while (condition) {
                             doAwesomeStuff();
                         }
@@ -152,7 +152,7 @@
                 <h2>Flow Control</h2>
                 <h3>Switch</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         switch(expr) {
                             case 1:
                                 handleCase1();
@@ -180,7 +180,7 @@
                     <a href="http://delapouite.com/ramblings/javascript-coercion-rules.html" target="_blank">coercion
                         rules</a> are quite extensive.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         0 == true; // false because true is converted to 1
                         1 == "1"; // true because 1 is converted to "1"
                         let x = 0 + ""; // x will be a string "0"
@@ -195,7 +195,7 @@
                     <li>Strict equals <span class="code">===</span> doesn't change the types</li>
                 </ul>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         1 == "1"; // true
                         1 === "1"; // false
                     </code>
@@ -206,7 +206,7 @@
                 <h2>Operators &amp; Coercion</h2>
                 <h3>Logical Operators</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         true && 42; // Returns second expression --> 42
                         false || 42 || true; // Returns first "true" expression
                     </code>
@@ -216,7 +216,7 @@
                 <h2>Try it yourself</h2>
                 <p>Open the console (F12 on windows, CMD + alt + I on Mac) and play around!</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         1 == "1"
                         1 === true
                         NaN === NaN
@@ -253,7 +253,7 @@
                 <p>Everything else is <span class="warn">truthy</span>!</p>
                 <p>Makes it easy to check whether a variable is present:</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let x = 'Hello World';
                         if (x) { // Truthy
                             doSomething();
@@ -270,7 +270,7 @@
                 <h2>Truthy &amp; Falsy</h2>
                 <p>Shorthand for safe variable declaration:</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let x = undefined;
 
                         let y = x || 'default';
@@ -324,7 +324,7 @@
                     <span class="badge es5"></span>
                 </div>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         // Whole-script strict mode syntax
                         'use strict';
                         var v = "Hi! I'm a strict mode script!";
@@ -339,7 +339,7 @@
                     <span class="badge es5"></span>
                 </div>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function strict() {
                             'use strict';
                             return "Hi!  I'm a strict mode function!";
@@ -369,7 +369,7 @@
                 <h2>Strings</h2>
                 <h3>Definition</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let aString = "I'm a string";
                         let anotherString = '"Me" too!';
                     </code>
@@ -382,7 +382,7 @@
                 <h2>Strings</h2>
                 <h3>Concatenation</h3>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let a = "I'm a";
                         let b = 'string!';
                         let c = a + ' ' + c;
@@ -400,7 +400,7 @@
                     <span class="badge es6"></span>
                 </div>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let x = 'String';
                         let aString = `I'm a "${x}" too!`;
 
@@ -417,7 +417,7 @@
                     <span class="badge es6"></span>
                 </div>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let aString = `It's even possible
                         to add line breaks!`;
 
@@ -432,7 +432,7 @@
                     <span class="badge es6"></span>
                 </div>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         let x;
                         `The value is: ${x ? x : 'not defined'}!`;
                         <span class="fragment">// The value is: not defined!</span>

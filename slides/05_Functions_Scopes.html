@@ -33,7 +33,7 @@
                 <h2>Functions( ) { }</h2>
                 <p>Function Declaration</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     sum(4, 9); // 13
 
                     function sum(a, b) {
@@ -48,7 +48,7 @@
                 <h2>Functions ( ) { } </h2>
                 <p>Function Expression</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     sum(1, 3); // TypeError: undefined is not a function
 
                     const sum = function(a, b) {
@@ -64,7 +64,7 @@
                 <h2>Functions ( ) { }</h2>
                 <p>(fat) arrow functions</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const fatArrow = () => console.log('arrow function');
                     // is the same as
                     const functionKeyword = function() {
@@ -78,7 +78,7 @@
                 <h2>Functions ( ) { } </h2>
                 <p>Functions are first-class objects</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function doThis(fn) {
                         fn();
                     }
@@ -95,7 +95,7 @@
                 <h2>Rest Parameters</h2>
                 <p>turns n parameters into an array</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function sum(...theArgs) {
                       return theArgs.reduce((previous, current) => {
                         return previous + current;
@@ -111,7 +111,7 @@
                 <h2>Spread Syntax</h2>
                 <p>Expands arrays or objects</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function sum(x, y, z) {
                         return x + y + z;
                     }
@@ -126,7 +126,7 @@
                 <h2>Spread Syntax</h2>
                 <p>Expands arrays or objects</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     var dateFields = [1970, 0, 1];  // 1 Jan 1970
                     var d = new Date(...dateFields);
                 </code>
@@ -136,7 +136,7 @@
                 <h2>Rest & Spread</h2>
                 <p>What happens here?</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function printValues(...values) {
                         console.log(values.length);
                     }
@@ -155,7 +155,7 @@
                 <p>JavaScript has a <span class="warn">Global Scope</span> and <span
                         class="warn">Function/Local Scope</span></p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     let globalVariable = 'I am global!';
 
                     function createScope() {
@@ -171,7 +171,7 @@
                 <h2>Scope</h2>
                 <p>There is no block scope...</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     if (isOver18) {
                         var canHaveDrinks = true;
                     }
@@ -184,7 +184,7 @@
                 <h2>Scope</h2>
                 <p>... unless you use <span class="code">let</span> or <span class="code">const</span>!</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     if (isOver18) {
                         let canHaveDrinks = true;
                     }
@@ -197,7 +197,7 @@
                 <h2>Scope</h2>
                 <p>This makes <span class="code">for-loops</span> a little less annoying.</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     for (var i = 0; i < arr.length; i++) {
                         // i is visible in the whole function scope :(
                     }
@@ -214,7 +214,7 @@
                 <h2>Scope</h2>
                 <p>IIFE: Immediately Invoked Function Expression</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     (function() {
                         const name = 'I am not on the global scope';
                     })()
@@ -227,7 +227,7 @@
                 <h2>Scope</h2>
                 <p>IIFEs are commonly used to prevent polluting the global scope and creating a "public API"</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     ((global) => {
                         function render() { ... }
                         function helperMethod() { ... }
@@ -265,7 +265,7 @@
                 <h2>Hoisting</h2>
                 <p>Consider this...</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     printStuff();
 
                     function printStuff() {
@@ -284,7 +284,7 @@
                     <span class="warn">moved to the top</span> of their function scope. It also applies to <span
                             class="code">var</span> declarations.</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     x = 5;
                     x = x * 2;
                     var x;
@@ -296,7 +296,7 @@
                 <h2>Hoisting</h2>
                 <p>Now you know the difference between the two ways of creating a function... right?</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     sum(1, 3);
                     add(2, 4);
 
@@ -315,7 +315,7 @@
                 <p><span class="code">let</span> and <span class="code">const</span> work in a slightly different way.
                 </p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     x = 5;
                     x = x * 2;
                     let x;
@@ -333,7 +333,7 @@
                 <h2>Exam I</h2>
                 <p><span class="code">undefined</span> or <span class="code">hello?</span></p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                    function hoist(a) {
                         hoisted = a;
                         console.log(a);
@@ -350,7 +350,7 @@
                 <div class="comparison">
                     <div class="code">
                         <pre>
-                            <code class="hljs javascript" data-trim contenteditable data-noescape>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                                function hoist(a) {
                                     hoisted = a;
                                     console.log(a);
@@ -363,7 +363,7 @@
                     </div>
                     <div class="code">
                         <pre>
-                            <code class="hljs javascript" data-trim contenteditable data-noescape>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                                function hoist(a) {
                                     var hoisted;
                                     hoisted = a;
@@ -380,7 +380,7 @@
                 <h2>Exam II</h2>
                 <p><span class="code">undefined</span> or <span class="code">Henry</span>?</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     printName('Henry');
 
                     function printName(name) {
@@ -396,7 +396,7 @@
                 <div class="comparison">
                     <div class="code">
                         <pre>
-                            <code class="hljs javascript" data-trim contenteditable data-noescape>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                                 printName('Henry');
 
                                 function printName(name) {
@@ -410,7 +410,7 @@
                     </div>
                     <div class="code">
                         <pre>
-                            <code class="hljs javascript" data-trim contenteditable data-noescape>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                                 printName('Henry');
 
                                 function printName(name) {
@@ -435,7 +435,7 @@
                 <h2>Closures</h2>
                 <p>Lexical scope is what most of us are used to. It is also known as static scope.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function closey() {
                             let x = 2;
 
@@ -454,7 +454,7 @@
                 <h2>Closures</h2>
                 <p>Closure lets functions access the scope they were declared in from outside that scope.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function closey() {
                             let x = 2;
 
@@ -474,7 +474,7 @@
                 <h2>Closures</h2>
                 <p>This sounds very fancy, but you probably already use this in your code.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         function wait(message) {
                             setTimeout(function() {
                                 console.log(message);
@@ -487,7 +487,7 @@
                 <h2>Closures</h2>
                 <p>What do you think happens here?</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         for (var i = 1; i <= 5; i++) {
                             setTimeout(() => console.log(i), i * 1000);
                         }
@@ -498,7 +498,7 @@
                 <h2>Closures</h2>
                 <p>A slightly tweaked version</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         for (var i = 1; i <= 5; i++) {
                             function wait(k) {
                                 setTimeout(function timer() {
@@ -516,7 +516,7 @@
                 <p><span class="warn">Careful!</span></p>
                 <p>References in closures can lead to memory leaks, for example when registering events.</p>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         const aBigObject = {};
 
                         button.onClick = function() {

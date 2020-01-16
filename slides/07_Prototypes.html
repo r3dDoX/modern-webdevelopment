@@ -46,7 +46,7 @@
                 <h2>Try it out!</h2>
                 <p>in the developer console. Have a close look at the output</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     {};
                     const obj1 = {};
                     const obj2 = {};
@@ -79,7 +79,7 @@
                 <p>You can put <span class="code">new</span> in front of every function call, turning it into a <span
                         class="warn">constructor call</span>.</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const result = uselessFunction(); // returns undefined
                     const withNew = new uselessFunction(); // returns {} !
 
@@ -103,7 +103,7 @@
                 <p>What happens behind the scenes when we call a function with <span class="code">new</span></p>
 
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const myObj = new SomeFunction();
                     // does roughly this:
                     const obj = {};
@@ -123,7 +123,7 @@
                 <p>Now have a look at your newly created object's prototype!</p>
 
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const person1 = new Person(), person2 = new Person();
 
                     Object.getPrototypeOf(person1)
@@ -195,7 +195,7 @@
             <section>
                 <h2>"Classes"</h2>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const freddy = new Person('Freddy', 35);
                     const johnny = new Person('Johnny', 47);
 
@@ -210,7 +210,7 @@
                 <h2>"Classes"</h2>
                 <p>Adding behaviour</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function Person(name, age) {
                         this.name = name;
                         this.age = age;
@@ -245,7 +245,7 @@
             <section>
                 <h2>Object.create</h2>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     const objWithoutProto = Object.create(null);
 
                     const myOwnProto = {
@@ -279,7 +279,7 @@
                 <h2>Inheritance</h2>
                 <p>Base "Class"</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function Person(name, age) {
                         this.name = name;
                         this.age = age;
@@ -291,7 +291,7 @@
                 <h2>Inheritance</h2>
                 <p>Child "Class"</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function Student(name, age, studentId) {
                         Person.call(this, name, age);
                         this.id = studentId;
@@ -306,7 +306,7 @@
                 <h2>Inheritance</h2>
                 <p>Try it out yourself in the console!</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function Person(name, age) {
                         this.name = name;
                         this.age = age;
@@ -342,7 +342,7 @@
                 <h2>Inheritance</h2>
                 <p>Since ES6 classes, you can hide this behaviour</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     class Person {
                         constructor(name, age) {
                             this.name = name;

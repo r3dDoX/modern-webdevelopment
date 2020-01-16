@@ -32,7 +32,7 @@
             <section>
                 <h2>Streams</h2>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function totalAgeOfWomen(persons) {
                         return persons
                                 .filter(p => p.gender === 'FEMALE')
@@ -48,7 +48,7 @@
                 <h2>Callbacks</h2>
                 <p>You can handle asynchronous calls with callback functions.</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     get('http://google.ch', function(response, error) {
                         console.log(response);
                     });
@@ -65,7 +65,7 @@
                 <h2>Callbacks</h2>
                 <p>This can quickly end up in <span class="warn">callback hell</span></p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     doThis(function(result) {
                         thenDoThat(data, function(result2) {
                             thenDoFinalThing(moreData, function(result3) {
@@ -82,7 +82,7 @@
                 <h2>Promises</h2>
                 <p>Promises make asynchronous calls more readable, especially when chained.</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     doThis(url)
                         .then(result => doThat(result))
                         .then(result2 => doFinalThing(result2))
@@ -93,7 +93,7 @@
             <section>
                 <h2>Promises</h2>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     function wait(millis) {
                         return new Promise(resolve => {
                             setTimeout(resolve, millis);
@@ -107,7 +107,7 @@
                 <p>When "waiting" for promises to resolve, you can also use <span class="code">async</span> functions to make
                     the code look even more synchronous!</p>
                 <pre>
-                <code class="hljs javascript" data-trim contenteditable data-noescape>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                     async function getSomeData(url) {
                         const response = await http.get(url);
                         return response.data;
@@ -130,14 +130,14 @@
             <section>
                 <h2>ES6 Modules</h2>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         // calculator.js
                         export const add = (a, b) => a + b;
                         export const multiply = (a, b) => a * b;
                     </code>
                 </pre>
                 <pre>
-                    <code class="hljs javascript" data-trim contenteditable data-noescape>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         // app.js
                         import { add } from './calculator';
                         import * as Calculator from './calculator';
