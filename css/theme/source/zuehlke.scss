@@ -388,6 +388,18 @@ $selectionBackgroundColor: rgba(0, 0, 0, 0.99);
           }
         }
 
+        .column-5 {
+          @extend .column;
+          width: 20%;
+          max-width: 20%;
+        }
+
+        .column-4 {
+          @extend .column;
+          width: 25%;
+          max-width: 25%;
+        }
+
         .column-3 {
           @extend .column;
           width: 33.333333%;
