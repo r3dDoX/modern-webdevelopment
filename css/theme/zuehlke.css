@@ -224,12 +224,18 @@
     width: 100%;
     flex-wrap: wrap;
     justify-content: space-between; }
-    .reveal .slides section .column-container .column, .reveal .slides section .column-container .column-3, .reveal .slides section .column-container .column-2, .reveal .slides section .column-container .bubble {
+    .reveal .slides section .column-container .column, .reveal .slides section .column-container .column-5, .reveal .slides section .column-container .column-4, .reveal .slides section .column-container .column-3, .reveal .slides section .column-container .column-2, .reveal .slides section .column-container .bubble {
       display: flex;
       flex-direction: column; }
-      .reveal .slides section .column-container .column img, .reveal .slides section .column-container .column-3 img, .reveal .slides section .column-container .column-2 img, .reveal .slides section .column-container .bubble img {
+      .reveal .slides section .column-container .column img, .reveal .slides section .column-container .column-5 img, .reveal .slides section .column-container .column-4 img, .reveal .slides section .column-container .column-3 img, .reveal .slides section .column-container .column-2 img, .reveal .slides section .column-container .bubble img {
         max-width: 70%;
         margin: auto; }
+    .reveal .slides section .column-container .column-5 {
+      width: 20%;
+      max-width: 20%; }
+    .reveal .slides section .column-container .column-4 {
+      width: 25%;
+      max-width: 25%; }
     .reveal .slides section .column-container .column-3 {
       width: 33.333333%;
       max-width: 33.333333%; }
