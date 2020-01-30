@@ -1,2 +1,2 @@
-# js-basics
+# javascript-basics
 The JavaScript Basics Course
