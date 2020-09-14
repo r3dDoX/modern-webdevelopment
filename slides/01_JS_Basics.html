@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>01 JS Basics | Modern Web Development</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>JavaScript Basics</h1>
+        </section>
+        <section>
+            <!-- Types -->
+            <section>
+                <h2>Types</h2>
+                <p>There are 6 primitive types:</p>
+                <ul>
+                    <li><span class="code">Null</span></li>
+                    <li><span class="code">Undefined</span></li>
+                    <li><span class="code">Boolean</span></li>
+                    <li><span class="code">Number</span></li>
+                    <li><span class="code">String</span></li>
+                    <li><span class="code">Symbol</span> (since ES6)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Types</h2>
+                <p>Everything else is considered an <span class="code">object</span></p>
+            </section>
+        </section>
+
+        <section>
+            <!-- Operators & Coercion -->
+            <section>
+                <h2>Operators &amp; Coercion</h2>
+                <h3>Definition of &laquo;Coercion&raquo;</h3>
+                <p>In computer science, type conversion, typecasting, and coercion are different ways of, implicitly or
+                    explicitly, changing an entity of one data type into another.</p>
+                <p>Coercion /kəʊˈəːʃ(ə)n/ &rightarrow; use of force to obtain compliance</p>
+            </section>
+            <section>
+                <h2>Operators &amp; Coercion</h2>
+                <h3>What does this mean in practice?</h3>
+                <p>If the operands of an operator are of different types, one of them will be converted. The
+                    <a href="https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/" target="_blank">coercion
+                        rules</a> are quite extensive.</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        0 == true; // false because true is converted to 1
+                        1 == "1"; // true because 1 is converted to "1"
+                        let x = 0 + ""; // x will be a string "0"
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Operators &amp; Coercion</h2>
+                <h3>Loose vs. Strict Equals</h3>
+                <ul>
+                    <li>Loose equals <span class="code">==</span> uses coercion</li>
+                    <li>Strict equals <span class="code">===</span> doesn't change the types</li>
+                </ul>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        1 == "1"; // true
+                        1 === "1"; // false
+                    </code>
+                </pre>
+                <div class="fragment tip">In your daily life, use strict equals only!</div>
+            </section>
+            <section>
+                <h2>Operators &amp; Coercion</h2>
+                <h3>Logical Operators</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        true && 42; // Returns second expression --> 42
+                        false || 42 || true; // Returns first "true" expression
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Try it yourself</h2>
+                <p>Open the console (F12 on windows, CMD + alt + I on Mac) and play around!</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        1 == "1"
+                        1 === true
+                        NaN === NaN
+                        undefined == undefined
+                        // be creative!
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <!-- Truthy & Falsy -->
+            <section>
+                <h2>Truthy &amp; Falsy</h2>
+                <ul>
+                    <li>Due to coercion everything can be converted to a <span class="warn">boolean</span></li>
+                    <li>Therefore every value is either <span class="warn">truthy</span> or <span
+                            class="warn">falsy</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Truthy &amp; Falsy</h2>
+                <h3>The six falsy cases</h3>
+                <ul>
+                    <li><span class="code">false</span></li>
+                    <li><span class="code">0</span> (zero)</li>
+                    <li><span class="code">''</span> or <span class="code">""</span> (empty string)</li>
+                    <li><span class="code">null</span></li>
+                    <li><span class="code">undefined</span></li>
+                    <li><span class="code">NaN</span> (Not a Number, e.g. the result of 1/0)</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Truthy &amp; Falsy</h2>
+                <p>Everything else is <span class="warn">truthy</span>!</p>
+                <p>Makes it easy to check whether a variable is present:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        let x = 'Hello World';
+                        if (x) { // Truthy
+                            doSomething();
+                        }
+
+                        let y = 0;
+                        if (y) { // Falsy
+                            doSomething();
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Truthy &amp; Falsy</h2>
+                <p>Shorthand for safe variable declaration:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        let x = undefined;
+
+                        let y = x || 'default';
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Truthy &amp; Falsy</h2>
+                <p>Try it yourself!</p>
+                <p data-height="330" data-editable="true" data-theme-id="0" data-slug-hash="dJMGjL"
+                   data-default-tab="js,result"
+                   data-user="enpayne" data-embed-version="2" data-pen-title="Truthy & Falsy" class="codepen">See the
+                    Pen <a href="https://codepen.io/enpayne/pen/dJMGjL/">Truthy & Falsy</a> by Nicolas Oeschger (<a
+                            href="https://codepen.io/enpayne">@enpayne</a>) on <a href="https://codepen.io">CodePen</a>.
+                </p>
+                <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Functions( ) { }</h2>
+                <p>Function Declaration</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    sum(4, 9); // 13
+
+                    function sum(a, b) {
+                        return a + b;
+                    }
+
+                    sum(4, 9); // 13
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Functions ( ) { } </h2>
+                <p>Function Expression</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    sum(1, 3); // TypeError: undefined is not a function
+
+                    const sum = function(a, b) {
+                        return a + b;
+                    }
+
+                    sum(1, 3); // 4
+                </code>
+                </pre>
+                <div class="tip fragment">don't worry, we will cover the difference in more detail later</div>
+            </section>
+            <section>
+                <h2>Functions ( ) { }</h2>
+                <p>(fat) arrow functions</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    const fatArrow = () => console.log('arrow function');
+                    // is the same as
+                    const functionKeyword = function() {
+                        console.log('arrow function')
+                    }
+                </code>
+                </pre>
+                <div class="tip fragment">Actually, it is not 100% the same, but we will cover that later.</div>
+            </section>
+            <section>
+                <h2>Functions ( ) { } </h2>
+                <p>Functions are first-class objects</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    function doThis(fn) {
+                        fn();
+                    }
+
+                    function giveMeAFunction() {
+                        return () => console.log('I am a function');
+                    }
+                </code>
+                </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Scope</h2>
+                <p>JavaScript has a <span class="warn">Global Scope</span> and <span
+                        class="warn">Function/Local Scope</span></p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    let globalVariable = 'I am global!';
+
+                    function createScope() {
+                        let localVariable = 'I am function-scoped!';
+                    }
+
+                    console.log(globalVariable); // I am global
+                    console.log(localVariable);  // ReferenceError
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Scope</h2>
+                <p>There is no block scope...</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    if (isOver18) {
+                        var canHaveDrinks = true;
+                    }
+
+                    console.log(canHaveDrinks); // true
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Scope</h2>
+                <p>... unless you use <span class="code">let</span> or <span class="code">const</span>!</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    if (isOver18) {
+                        let canHaveDrinks = true;
+                    }
+
+                    console.log(canHaveDrinks); // ReferenceError
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Scope</h2>
+                <p>This makes <span class="code">for-loops</span> a little less annoying.</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    for (var i = 0; i < arr.length; i++) {
+                        // i is visible in the whole function scope :(
+                    }
+                    <span class="fragment">
+                    for (let k = 0; k < arr.length; k++) {
+                        // k is only visible here :)
+                    }
+                        </span>
+                </code>
+                </pre>
+                <div class="tip fragment">In your daily life, always use const or let</div>
+            </section>
+            <section>
+                <h2>Scope</h2>
+                <p>IIFE: Immediately Invoked Function Expression</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    (function() {
+                        const name = 'I am not on the global scope';
+                    })()
+
+                    console.log(name); // ReferenceError
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Scope</h2>
+                <p>IIFEs are commonly used to prevent polluting the global scope and creating a "public API"</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    ((global) => {
+                        function render() { ... }
+                        function helperMethod() { ... }
+
+                        global.MyLibrary = {
+                            render: render
+                        }
+                    })(window)
+
+                    window.MyLibrary.render();
+                    window.MyLibrary.helperMethod(); // ReferenceError
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Try it yourself</h2>
+                <p data-height="412" data-theme-id="0" data-slug-hash="gegNqO" data-default-tab="js,result"
+                   data-user="enpayne" data-embed-version="2" data-pen-title="IIFE Modules" data-editable="true"
+                   class="codepen">See the Pen <a href="https://codepen.io/enpayne/pen/gegNqO/">IIFE Modules</a> by Nick
+                    Payne (<a href="https://codepen.io/enpayne">@enpayne</a>) on <a
+                            href="https://codepen.io">CodePen</a>.</p>
+                <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Hoisting</h2>
+                <p>This term is an attempt to make the way JavaScript compiles and runs code more understandable.</p>
+
+                <p>Simply put, <span class="warn">declarations</span>
+                    are put into memory during the compile phase, before any code is executed.</p>
+                <p class="fragment"><span class="warn">....what?</span></p>
+            </section>
+            <section>
+                <h2>Hoisting</h2>
+                <p>Consider this...</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    printStuff();
+
+                    function printStuff() {
+                        console.log('stuff');
+                    }
+                </code>
+                </pre>
+                <p class="fragment">Why does this work? The declared function
+                    <span class="code">printStuff</span> seems to be available "further up" than where it was authored.
+                </p>
+            </section>
+            <section>
+                <h2>Hoisting</h2>
+                <p>This is where the concept of <span class="warn">hoisting</span> comes in. We think of declarations
+                    being
+                    <span class="warn">moved to the top</span> of their function scope. It also applies to <span
+                            class="code">var</span> declarations.</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    x = 5;
+                    x = x * 2;
+                    var x;
+                    console.log(x); // 10
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Hoisting</h2>
+                <p>Now you know the difference between the two ways of creating a function... right?</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    sum(1, 3);
+                    add(2, 4);
+
+                    var sum = function(a, b) {
+                        return a + b;
+                    }
+
+                    function add(a, b) {
+                        return a + b;
+                    }
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Hoisting</h2>
+                <p><span class="code">let</span> and <span class="code">const</span> work in a slightly different way.
+                </p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    x = 5;
+                    x = x * 2;
+                    let x;
+                    console.log(x); // ReferenceError
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Hoisting</h2>
+                <p>Even though they are still hoisted, they can't be accessed before they are declared in the code.</p>
+                <p>This is called the <span class="warn">Temporal Deadzone (TDZ)</span>.</p>
+                <p>We won't cover this in more detail since it shouldn't affect you too much.</p>
+            </section>
+            <section>
+                <h2>Exam I</h2>
+                <p><span class="code">undefined</span> or <span class="code">hello?</span></p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                   function hoist(a) {
+                        hoisted = a;
+                        console.log(a);
+                        var hoisted;
+                    }
+
+                    hoist('hello?');
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Exam I</h2>
+                <p><span class="code strikethrough">undefined</span> or <span class="code">hello?</span></p>
+                <div class="comparison">
+                    <div class="code">
+                        <pre>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                               function hoist(a) {
+                                    hoisted = a;
+                                    console.log(a);
+                                    var hoisted;
+                                }
+
+                                hoist('hello?');
+                            </code>
+                </pre>
+                    </div>
+                    <div class="code">
+                        <pre>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                               function hoist(a) {
+                                    var hoisted;
+                                    hoisted = a;
+                                    console.log(a);
+                                }
+
+                                hoist('hello?');
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Exam II</h2>
+                <p><span class="code">undefined</span> or <span class="code">Henry</span>?</p>
+                <pre>
+                <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                    printName('Henry');
+
+                    function printName(name) {
+                        console.log(b);
+                        var b = name;
+                    }
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Exam II</h2>
+                <p><span class="code">undefined</span> or <span class="code strikethrough">Henry</span>?</p>
+                <div class="comparison">
+                    <div class="code">
+                        <pre>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                                printName('Henry');
+
+                                function printName(name) {
+                                    console.log(b);
+                                    var b = name;
+
+                                }
+
+                            </code>
+                </pre>
+                    </div>
+                    <div class="code">
+                        <pre>
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                                printName('Henry');
+
+                                function printName(name) {
+                                    var b;
+                                    console.log(b);
+                                    b = name;
+                                }
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Closures</h2>
+                <p>Closure is when a function is able to remember and access its lexical scope even when that function
+                    is executing outside its lexical scope.</p>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p>Lexical scope is what most of us are used to. It is also known as static scope.</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function closey() {
+                            let x = 2;
+
+                            talk();
+
+                            function talk() {
+                                console.log(x);
+                            }
+                        }
+
+                        closey(); // 2
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p>Closure lets functions access the scope they were declared in from outside that scope.</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function closey() {
+                            let x = 2;
+
+                            function talk() {
+                                console.log(x);
+                            }
+
+                            return talk;
+                        }
+
+                        const talk = closey();
+                        talk(); // 2
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p>This sounds very fancy, but you probably already use this in your code.</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function wait(message) {
+                            setTimeout(function() {
+                                console.log(message);
+                            }, 1000)
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p>What do you think happens here?</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        for (var i = 1; i <= 5; i++) {
+                            setTimeout(() => console.log(i), i * 1000);
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p>A slightly tweaked version</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        for (var i = 1; i <= 5; i++) {
+                            function wait(k) {
+                                setTimeout(function timer() {
+                                    console.log(k);
+                                }, i*1000 );
+                            }
+
+                            wait(i);
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Closures</h2>
+                <p><span class="warn">Careful!</span></p>
+                <p>References in closures can lead to memory leaks, for example when registering events.</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        const aBigObject = {};
+
+                        button.onClick = function() {
+                            console.log(aBigObject.lotsOfData)
+                        }
+                    </code>
+                </pre>
+                <div class="tip fragment">Keep your events tidy !</div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2><span class="code nobg">this</span> or that?</h2>
+                <p>The <span class="code">this</span> keyword is one of the most misunderstood concepts in JavaScript.</p>
+                <p>The reason why most developers are confused with it, is probably that <span class="code">this</span> in
+                    JavaScript works differently than in other languages.</p>
+                <p>Why is that? Let's dig a bit deeper...</p>
+            </section>
+            <section>
+                <h2>Intention of <span class="code nobg">this</span></h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function hello() {
+                            return `Hello ${this.name}!`;
+                        }
+
+                        const me = {name: "Nici"};
+
+                        const you = {name: "Student"};
+
+                        console.log(hello.call(me)); // Hello Nici!
+                        console.log(hello.call(you)); // Hello Student!
+                    </code>
+                </pre>
+                <p class="fragment">The <span class="code">call()</span> method calls a function with a given <span
+                        class="code">this</span> value and arguments provided individually.</p>
+            </section>
+            <section>
+                <h2>Intention of <span class="code nobg">this</span></h2>
+                <ul>
+                    <li>The idea of <span class="code">this</span> is to provide context</li>
+                    <li>Makes functions reusable against different contexts</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Intention of <span class="code nobg">this</span></h2>
+                <p>The previous example is equivalent to this:</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function hello(context) {
+                            return `Hello ${context.name}!`;
+                        }
+
+                        const me = {name: "Nici"};
+
+                        const you = {name: "Student"};
+
+                        console.log(hello(me)); // Hello Nici!
+                        console.log(hello(you)); // Hello Student!
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Confusions</h2>
+                <h3>Itself</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function countMe(number) {
+                            console.log('Number:', number);
+                            this.count++;
+                        }
+
+                        countMe.count = 0;
+
+                        for (let i = 0; i < 3; i++) countMe(i);
+
+                        // Number: 0
+                        // Number: 1
+                        // Number: 2
+
+                        console.log(countMe.count) <span class="fragment">// 0 - WTF?!</span>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Confusions</h2>
+                <h3>Itself</h3>
+                <ul>
+                    <li><span class="code">this</span> in <span class="code">countMe()</span> is automatically set to
+                        the <span
+                                class="warn">call-site</span> &rightarrow; Here the <span class="code">window</span>
+                        object
+                    </li>
+                    <li>We set a global variable by accident</li>
+                    <li>By invoking <span class="code">countMe()</span> we're producing a <span class="code">NaN</span>
+                    </li>
+                    <li><span class="code">console.log(window.count);</span> &rightarrow; <span class="warn">NaN</span>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Confusions</h2>
+                <h3>Its scope</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function foo() {
+                            let a = 'Hello';
+                            this.bar();
+                        }
+
+                        function bar() {
+                            console.log(this.a);
+                        }
+
+                        foo(); <span class="fragment">// undefined</span>
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Confusions</h2>
+                <h3>Its scope</h3>
+                There are several issues with this snippet:
+                <ul>
+                    <li>Using <span class="code">this.bar()</span> works only by coincidence</li>
+                    <li>Intention: Creating a <i>bridge</i> between <span class="code">foo()</span> and <span
+                            class="code">bar()</span> &rightarrow; There is no such <i>bridge</i>!
+                    </li>
+                    <li>The <span class="warn">lexical scope</span> of <span class="code">foo()</span> is not propagated
+                        to <span class="code">bar()</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>So what is <span class="code nobg">this</span>?</h2>
+                <ul>
+                    <li>Not an author-time but a runtime binding</li>
+                    <li>Has nothing to do with where the function is declared...</li>
+                    <li>...but everything with where and how it is invoked</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Bindings</h2>
+                <h3>Default - The catch all rule</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function bindingTest() {
+                            console.log(this.value);
+                        }
+
+                        var value = 'global';
+
+                        bindingTest(); // global
+                    </code>
+                </pre>
+                <p>&rightarrow; In <span class="warn">strict mode</span> the global object isn't eligible to be used as
+                    <span class="code">this</span>! It's <span class="code">undefined</span> instead.</p>
+            </section>
+            <section>
+                <h2>Bindings</h2>
+                <h3>Implicit</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function bindingTest() {
+                            console.log(this.value);
+                        }
+
+                        const implicitContext = {
+                            value: 'implicit',
+                            bindingTest: bindingTest
+                        }
+
+                        implicitContext.bindingTest(); // implicit
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Bindings</h2>
+                <h3>Implicitly lost</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function bindingTest() {
+                            console.log(this.value);
+                        }
+
+                        function invoke(fn) {
+                            fn(); // The call-site is here!
+                        }
+
+                        const implicitContext = {
+                            value: 'implicit',
+                            bindingTest: bindingTest
+                        }
+
+                        invoke(implicitContext.bindingTest); // undefined
+                    </code>
+                </pre>
+                <div class="tip fragment">Think of how <span class="code nobg">setTimeout()</span> works... ;)</div>
+            </section>
+            <section>
+                <h2>Bindings</h2>
+                <h3>Explicit</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function bindingTest() {
+                            console.log(this.value);
+                        }
+
+                        const explicitCtx = {
+                            value: 'explicit'
+                        }
+
+                        bindingTest.call(explicitCtx); // explicit
+                        bindingTest.apply(explicitCtx); // explcit
+
+                        const explicitlyBound = bindingTest.bind(explicitCtx);
+                        explicitlyBound(); // explicit
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Special case: Arrow functions</h2>
+                <p>Arrow compared to normal functions have a <span class="warn">lexical</span> <span class="code">this</span>!</p>
+                <div class="comparison">
+                    <div class="code">
+                        <div class="badge-container">
+                            <span class="badge es5"></span>
+                        </div>
+                        <pre>
+                        <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                            function Person() {
+                                this.age = 0;
+
+                                setInterval(function() {
+                                    this.age++;
+                                }.bind(this), 1000);
+                            }
+                        </code>
+                    </pre>
+                    </div>
+                    <div class="code">
+                        <div class="badge-container">
+                            <span class="badge es6"></span>
+                        </div>
+                        <pre>
+                        <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                           function Person() {
+                                this.age = 0;
+
+                                setInterval(() => {
+                                    this.age++;
+                                }, 1000);
+                            }
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Try it yourself</h2>
+                <p data-height="460" data-theme-id="0" data-slug-hash="wmWQjq" data-default-tab="js,result"
+                   data-user="enpayne" data-embed-version="2" data-pen-title="this" data-editable="true" class="codepen">See
+                    the Pen <a href="https://codepen.io/enpayne/pen/wmWQjq/">this</a> by Nick Payne (<a
+                            href="https://codepen.io/enpayne">@enpayne</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+                <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Classes</h2>
+            </section>
+            <section>
+                <h3>A word of caution</h3>
+                <ul>
+                    <li>Only Syntax</li>
+                    <li>Prototypes in the background</li>
+                    <li>Different behaviour than e.g. Java Classes</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Basic Syntax</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        class Cat {
+                            constructor(name) {
+                                this.name = name;
+                            }
+
+                            meow() {
+                                console.log(`Meow: ${this.name}`);
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Effective Structure</h3>
+                <img src="../img/basics/classes_prototypes.png">
+            </section>
+            <section>
+                <h3>Prototype Chaining</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        class SuperCat extends Cat {
+                            constructor(name) {
+                                super(name);
+                            }
+
+                            superMeow() {
+                                console.alert('MEEEOOWW!!');
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Effective Structure</h3>
+                <img src="../img/basics/classes_prototypes_extends.png">
+            </section>
+            <section>
+                <h3>Prototype</h3>
+                <ul>
+                    <li>Basic way how JS Objects are composed</li>
+                    <li>Normal JS Object</li>
+                    <li>Modification affects all instances</li>
+                </ul>
+            </section>
+        </section>
+
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        },
+      },
+    ],
+  });
+</script>
+</body>
+</html>

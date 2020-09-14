@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>02 JS Ecosystem | Modern Web Development</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>JavaScript Ecosystem</h1>
+        </section>
+
+        <section>
+            <section>
+                <h2>npm</h2>
+                <ul>
+                    <li>Official package manager for node.js</li>
+                    <li>Installed automatically with node.js</li>
+                    <li>The npm registry contains <span class="strikethrough">512k ... 768k ... 1024k</span> over 1.3 million packages</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Package count</h2>
+                <img src="../img/ecosystem/npm_package_count.png" width="80%">
+            </section>
+            <section>
+                <h2>npm: package.json</h2>
+                <ul>
+                    <li>Manifest file with name, version, author, website, etc.</li>
+                    <li>Lists all the dependencies of your application</li>
+                    <li>Divided into development and production dependencies</li>
+                    <li>Versions</li>
+                    <li>Corresponding lockfile <span class="code">package-lock.json</span></li>
+                </ul>
+            </section>
+            <section>
+                <h2>npm runkit</h2>
+                <p>Test packages directly in the browser</p>
+                <p>👉🏼 <a href="https://npm.runkit.com/date-fns" target="_blank">date-fns</a></p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Modularization</h2>
+            </section>
+            <section>
+                <h2><span class="fragment" data-fragment-index="0">ES6</span> Modules <span class="fragment" data-fragment-index="0">changed everything</span></h2>
+                <div class="column-container">
+                    <div class="bubble">
+                        IIFE
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        Unveiling Module Pattern
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        AMD
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        CommonJS
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        UMD
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        Angular Modules
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">
+                        Typescript Modules
+                        <span class="fragment strike-through" data-fragment-index="0"></span>
+                    </div>
+                    <div class="bubble">ES6 Modules</div>
+                </div>
+            </section>
+            <section>
+                <h2>CommonJS Modules</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        // calculator.js
+                        module.exports = {
+                            add: (a, b) => a + b,
+                            multiply: (a, b) => a * b
+                        };
+                    </code>
+                </pre>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        // app.js
+                        const calc = require('./calculator.js');
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>ES6 Modules</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        // calculator.js
+                        export const add = (a, b) => a + b;
+                        export const multiply = (a, b) => a * b;
+                    </code>
+                </pre>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        // app.js
+                        import { add } from './calculator';
+                        import * as Calculator from './calculator';
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Bundler</h2>
+                <p>A JavaScript bundler is a tool that puts your code and all its dependencies together in one file.</p>
+                <img width="70%" src="../img/ecosystem/bundler.png" />
+            </section>
+            <section>
+                <h2>History</h2>
+                <div class="column-container">
+                    <div class="column-3">
+                        <h3>2014</h3>
+                        <img src="../img/ecosystem/grunt.png">
+                    </div>
+                    <div class="column-3">
+                        <h3>2015</h3>
+                        <img src="../img/ecosystem/gulp.png">
+                    </div>
+                    <div class="column-3">
+                        <h3>2016+</h3>
+                        <img src="../img/ecosystem/webpack.png">
+                        <p>&amp;</p>
+                        <img src="../img/ecosystem/npm.png">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Bundler</h2>
+                <p><a href="https://webpack.js.org/">Webpack 👉🏼</a></p>
+                <p>Recommended for applications</p>
+                <img width="70%" src="../img/ecosystem/webpack.jpg" />
+                <div class="tip fragment">Webpack has established itself as the top bundler</div>
+            </section>
+            <section>
+                <h2>Bundler</h2>
+                <p><a href="https://rollupjs.org/guide/en">Rollup.js 👉🏼</a></p>
+                <p>Recommended for smaller libraries</p>
+            </section>
+        </section>
+
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        },
+      },
+    ],
+  });
+</script>
+</body>
+</html>
