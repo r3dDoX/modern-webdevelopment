@@ -119,8 +119,9 @@
                 <pre>
                     <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
                         // calculator.js
-                        export const add = (a, b) => a + b;
+                        export function add(a, b) { return a + b; }
                         export const multiply = (a, b) => a * b;
+                        export default const TIMEOUT = 250;
                     </code>
                 </pre>
                 <pre>
@@ -128,6 +129,7 @@
                         // app.js
                         import { add } from './calculator';
                         import * as Calculator from './calculator';
+                        import test from './calculator';
                     </code>
                 </pre>
             </section>
@@ -169,6 +171,52 @@
                 <h2>Bundler</h2>
                 <p><a href="https://rollupjs.org/guide/en">Rollup.js 👉🏼</a></p>
                 <p>Recommended for smaller libraries</p>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Transpilers</h2>
+                <p>Transpilers, a.k.a. <span class="warn">source-to-source compilers</span> are tools that read source code written in one language
+                    and produce the equivalent code in another language</p>
+            </section>
+            <section>
+                <h2>Transpilers</h2>
+                <p>Typescript</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        class Car {
+                            ps: number;
+
+                            constructor(ps: number) {
+                                this.ps = ps;
+                            }
+
+                            drive: () => console.log(`Car with ${this.ps} is driving.`);
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Transpilers</h2>
+                <p>to JavaScript (ES5)</p>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        var Car = (function () {
+                            function Car(ps) {
+                                this.ps = ps;
+                            }
+                            Car.prototype.drive = function () {
+                                console.log("Car with " + this.ps + " is driving.");
+                            };
+                            return Car;
+                        }());
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Babel</h2>
+                <p>The most commonly used transpiler by far is <a href="https://babeljs.io/">Babel</a> 👉🏼</p>
+                <img src="../img/ecosystem/babel.png" />
             </section>
         </section>
 

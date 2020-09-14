@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>03 Typescript | Modern Web Development</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Typescript</h1>
+        </section>
+
+        <section>
+            <h2>Typescript exists only at compile time</h2>
+        </section>
+
+        <section>
+            <section>
+                <h2>Structural Type Matching</h2>
+            </section>
+            <section>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        interface Named {
+                            name: string;
+                        }
+
+                        function typedFunc(person: Named) {
+                            console.log(person.name);
+                        }
+
+                        typedFunc({ name: 'Batsman' })
+                    </code>
+                </pre>
+                <p>This is correct in TS while nominally typed languages like Java would throw an Error</p>
+            </section>
+            <section>
+                <h2>Just works™</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        interface Named {
+                            name: string;
+                        }
+
+                        class Person {
+                            name: string;
+                        }
+
+                        let p: Named;
+                        p = new Person();
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Union Types</h2>
+            </section>
+            <section>
+                <h2>Declaration</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        type myUnion = 'cat' | 'dog' | 'catdog';
+
+                        const test: myUnion = 'cat'; // ok
+                        const test2: myUnion = 'person'; // error
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Union vs Enum</h2>
+                <ul>
+                    <li>Type safety</li>
+                    <li>Code completion works</li>
+                    <li>Less Code</li>
+                    <li>No imports</li>
+                    <li>Favor union over enum</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Mix with structural types</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        interface FlyAction {
+                            type: 'Fly';
+                            fly: () => void;
+                        }
+
+                        interface SwimAction {
+                            type: 'Swim';
+                            swim: () => void;
+                        }
+
+                        function move(action: FlyAction | SwimAction) {
+                            if (action.type === 'Fly') {
+                                action.fly();
+                            } else {
+                                action.swim();
+                            }
+                        }
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>@types packages</h2>
+            </section>
+            <section>
+                <h2>Types for packages without</h2>
+                <ul>
+                    <li>3rd party libs without types are a pain in the ass</li>
+                    <li>Goal: provide types for any 3rd party lib</li>
+                    <li><a href="https://github.com/DefinitelyTyped/DefinitelyTyped">Open Source repo</a></li>
+                    <li>Easily install e.g.:
+                        <pre><code class="hljs npm">npm install @types/jest</code></pre>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <p>There are types for all popular libs...</p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Advanced types</h2>
+            </section>
+            <section>
+                <h2>Generic object types</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        type HimTypes = 'CONSTRUCTION_SITE' | 'DELAY' | 'DISTURBANCE';
+
+                        type HimIcons = {
+                            [key in HimTypes]: boolean | string;
+                        }
+
+                        const icons: HimIcons {
+                            DELAY: true,
+                            ...
+                        }
+                    </code>
+                </pre>
+                <p>Code completion and error if wrong key or not all keys</p>
+            </section>
+            <section>
+                <h2>keyof</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        interface Named {
+                            first: string;
+                            last: string;
+                        }
+
+                        function extractNamePart(key: keyof Named) { ... }
+
+                        extractNamePart('first');
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>advanced keyof</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        function prop&lt;T, K extends keyof T&gt;(obj: T, key: K) {
+                            return obj[key];
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Nullable types</h2>
+                <p>Compiler flag <strong>strictNullChecks</strong> has to be set.</p>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        function f(x: number, y?: number) {
+                            return x + (y ?? 0);
+                        }
+
+                        f(1, 2);
+                        f(1);
+                        f(1, undefined);
+                        f(null); // Error
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Intersection types</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim contenteditable data-noescape spellcheck="false">
+                        type LinkedList&lt;Type&gt; = Type & { next: LinkedList&lt;Type&gt; };
+
+                        interface Person {
+                            name: string;
+                        }
+
+                        const people: LinkedList&lt;Person&gt; = getPeople();
+                        people.name;
+                        people.next.name;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Many more...</h2>
+                <ul>
+                    <li>Partial&lt;T&gt;</li>
+                    <li>Readonly&lt;T&gt;</li>
+                    <li>Conditional types</li>
+                    <li>User-Defined Type Guards</li>
+                </ul>
+            </section>
+        </section>
+
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        },
+      },
+    ],
+  });
+</script>
+</body>
+</html>
