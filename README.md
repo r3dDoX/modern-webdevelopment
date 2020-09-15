@@ -1,2 +1,3 @@
-# javascript-basics
-The JavaScript Basics Course
+# Modern Webdevelopment
+
+Follow: https://r3ddox.github.io/modern-webdevelopment/
