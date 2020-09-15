@@ -849,16 +849,16 @@
                             <span class="badge es6"></span>
                         </div>
                         <pre>
-                        <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
-                           function Person() {
-                                this.age = 0;
+                            <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                               function Person() {
+                                    this.age = 0;
 
-                                setInterval(() => {
-                                    this.age++;
-                                }, 1000);
-                            }
-                        </code>
-                    </pre>
+                                    setInterval(() => {
+                                        this.age++;
+                                    }, 1000);
+                                }
+                            </code>
+                        </pre>
                     </div>
                 </div>
             </section>
@@ -929,6 +929,70 @@
                     <li>Basic way how JS Objects are composed</li>
                     <li>Normal JS Object</li>
                     <li>Modification affects all instances</li>
+                </ul>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Some new(er) Syntax</h2>
+            </section>
+            <section>
+                <h2>Optional chaining</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        const adventurer = {
+                            name: 'Alice',
+                        };
+
+                        adventurer?.name // 'Alice'
+                        adventurer.dog?.name // undefined
+                        adventurer.someFunction?.() // undefined
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Nullish coalescing</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        null ?? 'default' // default
+                        undefined ?? 'default' // default
+                        0 ?? 'default' // 0
+                        '' ?? 'default' // ''
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Deconstructuring</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        const { a } = { a: 'test', b: 'other' };
+                        console.log(a); // 'test'
+
+                        const [first, best, ...rest] = [1, 2, 3, 4];
+                        console.log(first); // 1
+                        console.log(best); // 2
+                        console.log(rest); // [3, 4];
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>async/await</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        async function test() {
+                            const asyncResult = await doSomeAsyncTask();
+                            console.log(asyncResult);
+                        }
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>async/await</h2>
+                <ul>
+                    <li>Pauses until the awaited task is fulfilled</li>
+                    <li>Only Syntax</li>
+                    <li>Returns a Promise</li>
+                    <li>More sequential code to read</li>
                 </ul>
             </section>
         </section>
