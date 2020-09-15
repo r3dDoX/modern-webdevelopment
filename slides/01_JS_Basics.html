@@ -995,6 +995,39 @@
                     <li>More sequential code to read</li>
                 </ul>
             </section>
+            <section>
+                <h2>spread/rest</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        function sum(...operators) {
+                            return operators.reduce(
+                                (acc, current) => acc + current,
+                                0,
+                            );
+                        }
+
+                        sum(1, 2) // 3
+                        sum(1, 2, 3, 4) // 10
+
+                        const operators = [1, 2, 3];
+                        sum(...operators); // 6
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>spread #2</h2>
+                <pre>
+                    <code class="hljs javascript" data-trim contenteditable data-noescape spellcheck="false">
+                        const originalArray = [1, 2, 3, 4];
+                        const shallowCopyArray = [...originalArray];
+                        const extendedArray = [-1, 0, ...originalArray];
+
+                        const originalObject = { a: 1, b: 2 };
+                        const shallowCopyObject = { ... originalObject };
+                        const extendedObject = { ...originalObject, c: 3 };
+                    </code>
+                </pre>
+            </section>
         </section>
 
         <section class="deck-slide">
