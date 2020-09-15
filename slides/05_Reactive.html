@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>05 Reactive Programming | Modern Web Development</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Reactive Programming</h1>
+        </section>
+
+        <section>
+            <section>
+                <h2>Reactive Programming</h2>
+                <p>
+                    Terminology
+                </p>
+            </section>
+            <section>
+                <h2>Wikipedia</h2>
+                <blockquote cite="https://en.wikipedia.org/wiki/Reactive_programming">
+                    <p>
+                        "In computing, reactive programming is a declarative programming paradigm
+                        concerned with data streams and the propagation of change"
+                    </p>
+                </blockquote>
+            </section>
+            <section>
+                <h2>Stackoverflow</h2>
+                <img src="../img/reactive/stackoverflow_question.png"/>
+                <br>
+                <img src="../img/reactive/stackoverflow_answer.png"/>
+            </section>
+            <section>
+                <h2>
+                    André Staltz
+                </h2>
+                <blockquote cite="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">
+                    <p>
+                        "Reactive programming is programming with asynchronous data streams."
+                    </p>
+                </blockquote>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>RxJS</h2>
+            </section>
+            <section>
+                <h3>Reactive Extensions</h3>
+                <ul>
+                    <li>Async programming with streams</li>
+                    <li>Many Languages: Java, C#, C++, Swift, ...</li>
+                    <li>Simply Put: Observer Pattern on steroids</li>
+                    <li>Core pattern in Angular</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Pretty much anything is a stream</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        import { fromEvent } from 'rxjs';
+
+                        const button = document.querySelector('.button');
+                        const click$ = fromEvent(button, 'click');
+
+                        click$.subscribe(console.log); // log whole click event
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Pretty much anything is a stream #2</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        import { interval, from, of } from 'rxjs';
+
+                        const source$ = interval(1000);
+
+                        const array$ = from([1,2,3,4,5]);
+
+                        const promise$ = from(fetch('/foo.json'));
+
+                        const vars$ = of('Chris', 'Stefan', 'Patrick');
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Piping</h3>
+                <ul>
+                    <li>Chain operators together</li>
+                    <li>Each operator should be pure</li>
+                    <li>Share operator logic</li>
+                </ul>
+            </section>
+            <section>
+                <h3>Piping #2</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        const { filter, map } from 'rxjs/operators';
+
+                        source$
+                            .pipe(
+                                filter(value => value % 2 === 0),
+                                map(value => x + x),
+                            )
+                            .subscribe(console.log)
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Piping #3</h3>
+                <a href="http://rxmarbles.com/#switchMap" target="_blank">RxMarbles</a>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        import { from } from 'rxjs';
+                        const { switchMap } from 'rxjs/operators';
+
+                        source$
+                            .pipe(
+                                switchMap((url) => from(fetch(url))),
+                            );
+                        // cancel inner observable on each new emission
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Combining streams</h3>
+                <a href="http://rxmarbles.com/#concat" target="_blank">RxMarbles</a>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        const { concat, merge } from 'rxjs/operators';
+
+                        source$.pipe(concat(source2$));
+                        // append second stream after first completed
+
+                        source$.pipe(merge(source2$));
+                        // emit every event from both streams
+                        merge(source$, source2$); // also static
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Combining streams #2</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        import { from } from 'rxjs';
+                        const { forkJoin } from 'rxjs/operators';
+
+                        source$
+                            .pipe(
+                                forkJoin(
+                                    from(fetch('/api/first')),
+                                    from(fetch('/api/second')),
+                                ),
+                            );
+                        // emit after all observables completed
+                        // emit final observable result
+                    </code>
+                </pre>
+                <aside class="notes">
+                    similar to Promise.all
+                    Emits last event of each Observable when all finished
+                </aside>
+            </section>
+            <section>
+                <h3>Error Handling</h3>
+                <pre>
+                    <code class="hljs javascript" data-trim>
+                        import { from, of } from 'rxjs';
+
+                        source$
+                            .pipe(
+                                catchError(error => {
+                                    console.error(error);
+                                    return of([]);
+                                })
+                            );
+                        // must return new Observable so operators
+                        // down the stream won't fail
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>RxJS Operators</h3>
+                <p>
+                    <a href="https://github.com/btroncone/learn-rxjs" target="_blank">https://github.com/btroncone/learn-rxjs</a>
+                </p>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>RxJS and Angular</h2>
+            </section>
+            <section>
+                <h2>Common pitfalls</h2>
+                <ul>
+                    <li>Memory Leaks</li>
+                    <li>Side-Effects</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Memory Leaks</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim>
+                        this.nonFinishingObservable
+                            .subscribe(result => this.result = result);
+                    </code>
+                </pre>
+                <ul>
+                    <li>Subscription stays open</li>
+                    <li>Closure of callback stays in memory</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Memory Leaks Solution</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim>
+                        this.subscription = this.nonFinishingObservable
+                            .subscribe(result => this.result = result);
+
+                        // onDestroy
+                        this.subscription?.unsubscribe();
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Side-Effects</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim>
+                        this.datasetSelectionService.datasetValue$
+                            .subscribe(dataset => this.selectedDataset = dataset);
+                    </code>
+                </pre>
+                <ul>
+                    <li>Relies on Angular change detection</li>
+                    <li>Often unnecessary caching</li>
+                </ul>
+            </section>
+            <section>
+                <h2>async pipe</h2>
+                <pre>
+                    <code class="hljs html" data-trim>
+                        &lt;app-component
+                            someProperty="observable$ | async"
+                        &gt;&lt;/app-component&gt;
+                    </code>
+                </pre>
+                <ul>
+                    <li>No memory leaks</li>
+                    <li>No unnecessary unwrapping</li>
+                </ul>
+            </section>
+            <section>
+                <h2>async pipe</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim>
+                        this.observable$ = this.someUnfinishingObservable$
+                            .pipe(
+                                filter(value => value > 5),
+                                map(value => value * 2),
+                            );
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>async pipe</h2>
+                <ul>
+                    <li>Change detection is hard</li>
+                    <li>Use whenever possible</li>
+                    <li>Unwrapping observables at component border</li>
+                    <li>Updating props instead of members</li>
+                </ul>
+            </section>
+        </section>
+
+        <section>
+            <h3>Exercise Time!</h3>
+            <p>
+                <a href="https://codesandbox.io/s/106z3w52nl" target="_blank">Codesandbox</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Further Readings & Resources</h2>
+            <ul>
+                <li><a href="http://rxmarbles.com/" target="_blank">RX Marbles</a></li>
+                <li><a href="https://github.com/btroncone/learn-rxjs" target="_blank">Learn RxJS</a></li>
+                <li><a href="https://rxjs-dev.firebaseapp.com/" target="_blank">RxJS</a></li>
+            </ul>
+        </section>
+
+
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        },
+      },
+    ],
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>04 Functional Programming | Modern Web Development</title>
+
+    <link rel="icon" href="../img/zuehlke_logo.jpg">
+    <link rel="stylesheet" href="../css/reveal.css">
+    <link rel="stylesheet" href="../css/theme/zuehlke.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../lib/css/monokai.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi) ? '../css/print/pdf.css' : '../css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section class="deck-slide">
+            <h1>Functional Programming</h1>
+        </section>
+
+        <section>
+            <section>
+                <h2>Function</h2>
+                <p>
+                    A function is a process which takes some input, called arguments,
+                    and produces some output called a return value.
+                </p>
+                <p>
+                    <code>fn(in) => out</code>
+                </p>
+            </section>
+            <section>
+                <h2>Purpose of a function</h2>
+                <ul>
+                    <li><b>mapping</b> - A function maps input values to output values.​</li>
+                    <li><b>procedure</b> - A function may perform a sequence of steps.</li>
+                    <li><b>i/o</b> - A function may communicate with other parts of the system -> Side Effects</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Higher Order Function</h2>
+                <p>A function which takes a function as an argument, returns a function, or both.</p>
+            </section>
+            <section>
+                <h2>Pure Function</h2>
+                <p>Definition</p>
+                <ul>
+                    <li>… given the same input, will always return the same output.​</li>
+                    <li>… produces no side effects.​</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Pure Function</h2>
+                <p>Definition</p>
+                <ul>
+                    <li>… does not rely on any external mutable state.​</li>
+                    <li>… does not mutate external state.​</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Impure Function</h2>
+                <p>The very opposite of a pure function</p>
+                <p>
+                    <cite>
+                        "A dead giveaway that a function is impure is if it makes sense to call it without using its
+                        return
+                        value. For pure functions, that’s a noop."
+                    </cite>
+                </p>
+                <p><a href="https://codesandbox.io/s/8z3m6wx7ll" target="_blank">Exercises</a></p>
+                <aside class="notes">
+                    <ul>
+                        <li>This is the first exercise</li>
+                        <li>Click on the link. There is nothing to be installed. Everything can be done from within the browser.</li>
+                        <li>Do not excessively refresh your browser -> Sandbox might get stuck / blocked</li>
+                        <li>The idea of this exercise is to assess whether the given functions in the exercises are pure or impure based on the given definitions.</li>
+                        <li>The class should discuss in pairs for a couple of minutes and then we discuss the results in the plenum.</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    let sum = function(a, b) {
+                      return a + b;
+                    };
+
+                    let result = sum(1, 2);
+                </code></pre>
+                <div class="tip fragment">pure => primitives are immutable</div>
+                <aside class="notes">
+                    <ul>
+                        <li>trivial example for the start, nothing extraordinary here</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    var value1 = 1;
+                    var value2 = 2;
+
+                    let sum = function (a, b) {
+                      return a + b;
+                    };
+
+                    let result = sum(value1, value2);
+                </code></pre>
+                <div class="tip fragment">pure => primitives are immutable</div>
+                <aside class="notes">
+                    <ul>
+                        <li>another trivial example for the start, nothing extraordinary here</li>
+                        <li>var is mutable, but the values is passed by value</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const value1 = 1;
+                    var b = 2;
+
+                    let sum = function (a, b) {
+                      return a + b;
+                    };
+
+                    let result = sum(value1, b);
+                </code></pre>
+                <div class="tip fragment">pure => primitives are immutable</div>
+                <aside class="notes">
+                    <ul>
+                        <li> value1 is constant</li>
+                        <li>var b is part of function scope</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    let a = 0;
+                    let b = 1;
+
+                    let sum = function(a, b) {
+                      return a = a + b;
+                    }
+
+                    let result = sum(a, b);
+                </code></pre>
+                <div class="tip fragment">pure => primitives are immutable <br/>- assignment is part of function
+                    scope
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>we tried to trick you</li>
+                        <li>a,b are part of function scope</li>
+                        <li>assignment to a is part of function scope</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    let a = 0;
+
+                    let inc = function (a) {
+                      return a++;
+                    }
+
+                    let result = inc(a);
+                </code></pre>
+                <div class="tip fragment">pure => primitives are immutable</div>
+                <aside class="notes">
+                    <ul>
+                        <li>a is part of function scope</li>
+                        <li>assignment to a is part of function scope</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    var array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+                    let map = function (array) {
+                      for (var i = 0; i < array.length; i++) {
+                        setTimeout(() => array[i]++, 0);
+                      }
+                      return array;
+                    }
+
+                    let result = map(array);
+                </code></pre>
+                <div class="tip fragment">impure => setTimeout is a side-effect<br/>- array is resized <br/>- array is mutable*</div>
+                <aside class="notes">
+                    <ul>
+                        <li>setTimeout is a side-effect on its own - everything else does not really matter</li>
+                        <li>Explain the grayzone about purity. There is a strict and a less-strict way of interpreting it.</li>
+                        <li>Since we are not in a purely functional language we may stick to the less strict interpretation</li>
+                        <li>In a purely functional language this would be impure if array were mutable</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const immutable = { a: 1, b: 2, c: 3 };
+
+                    function mutate(object) {
+                      return object;
+                    }
+
+                    let result = mutate(immutable);
+                </code></pre>
+                <div class="tip fragment">1) pure => identity-function <br/>2) impure => object is mutable*</div>
+                <aside class="notes">
+                    <ul>
+                        <li>identity-function is always pure</li>
+                        <li>Grayzone: object is mutable, but it isn't modified here, so we could say it is still pure</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    const array = [8, 4, 1, 6, 8, 0];
+
+                    function sort(list) {
+                      console.log("sorted:" + (list = list.slice().sort()));
+                      return list;
+                    }
+
+                    let result = sort(array);
+                </code></pre>
+                <div class="tip fragment">impure => console.log is a side-effect</div>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    function log() {
+                      console.log("Hello World");
+                    }
+
+                    function doSomething(fn) {
+                      if (1 === 0) {
+                        fn();
+                      }
+                      return 1;
+                    }
+
+                    let result = doSomething(log);
+                </code></pre>
+                <div class="tip fragment">pure => doSomething() is pure despite log() being impure</div>
+                <aside class="notes">
+                    <ul>
+                        <li>The function is never performed</li>
+                        <li>Little side explanation about purely funcitonal languages: It can be proven that fn will never be performed here since the condition is static.</li>
+                        <li>Besides: Also the compiled machine code will not include the if-statement</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    function doNothing(fn) {
+                          return fn;
+                    }
+
+                    let result = doNothing(Math.random);
+                </code></pre>
+                <div class="tip fragment">pure => doNothing() is the identity-function <br/>- Math.random
+                    (impure) is never performed
+                </div>
+                <aside class="notes">
+                    <ul>
+                        <li>if Math.random were performed anywhere, then the function would be impure</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    function getDocument() {
+                      return global.window.document;
+                    }
+                    getDocument()
+
+                    let result = getDocument();
+                </code></pre>
+                <div class="tip fragment">impure => accessing external/global scope</div>
+                <aside class="notes">
+                    <ul>
+                        <li>global state is mutable in Javascript, therefore this is impure</li>
+                        <li>Note: this could be transformed to be pure</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Pure or impure ? Why ?</h2>
+                <pre><code class="hljs javascript" data-trim contenteditable data-noescape>
+                    function divide(dividend, divisor) {
+                      if (divisor === 0) throw new Error("Can't divide by 0.");
+                      return dividend / divisor;
+                    }
+
+                    let result = divide(1, 1);
+                </code></pre>
+                <div class="tip fragment">impure => exceptions are side-effects</div>
+                <aside class="notes">
+                    <ul>
+                        <li>Exceptions cause context-switch on the stack, swapping control to the exception handler</li>
+                        <li>Note: this could be transformed to be pure</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Properties of pure functions</h2>
+                <ul>
+                    <li>deterministic</li>
+                    <li>predictable</li>
+                    <li>completely independent of outside state​</li>
+                    <li>immune to bugs related to shared mutable state​</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Properties of pure functions</h2>
+                <ul>
+                    <li>"referentially transparent"<br/><br/>
+                        = any call to a pure function can be replaced with its resulting value without changing the
+                        meaning of the program​
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Use of pure functions</h2>
+                <ul>
+                    <li>great candidates for parallel processing</li>
+                    <li>easy to move around, refactor and reorganize</li>
+                    <li>flexible and adaptable to future changes​</li>
+                    <li>very easy + safe to reuse (no state, no side-effects)​</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Shades of Purity</h2>
+                <ul>
+                    <li>Technically, there are no pure functions in a non purely functional language</li>
+                    <li>However (almost) pure is good enough for functional-oriented languages</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>In a language like Haskhell, which is truly functional, purity can be proven because of referential transparency and the fact that is is based on math.</li>
+                        <li>It's basically just a deduction of all functions until only a constant remains (mathematically fond proof). If not then there exists a side-effect.</li>
+                        <li>So purely functional oriented languages can proofe the presence/absence of side-effects (and that's one major reason what makes them awesome)</li>
+                        <li>In all other languages which are only functionally oriented this proof is not possible and purity must be interpreted slightly less strict - but this is still good
+                            enough.
+                        </li>
+                    </ul>
+                </aside>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Array Functions</h2>
+            </section>
+            <section>
+                <h2>Array Functions: Quick Recap</h2>
+                <ul class="grid">
+                    <li>filter()</li>
+                    <li>find()</li>
+                    <li>some()</li>
+                    <li>every()</li>
+                    <li>map()</li>
+                    <li>flatMap()</li>
+                    <li>reduce()</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Extension Libraries</h2>
+                <ul>
+                    <li>Prototype</li>
+                    <li>jQuery</li>
+                    <li>Underscore.js</li>
+                    <li>Do it yourself utility</li>
+                    <div class="tip fragment">no longer necessary - really ! => go native</div>
+                </ul>
+            </section>
+            <section>
+                <h2>(Native) Array Functions</h2>
+                <ul>
+                    <li>No fishy/magic transformations of callbacks</li>
+                    <li>No fishy/magic extra behaviour during iterations</li>
+                    <li>Performance</li>
+                    <li>ECMAScript (Standard) is evolving quickly</li>
+                </ul>
+                <aside class="notes">
+                    <ul>
+                        <li>Array functions are so important, that we will quickly recap them</li>
+                        <li>Most are trivial, we will not spend time on them</li>
+                        <li>We will focus on reduce() since this is the most complec but also versatile one</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>filter()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                        array.filter(fn(currentValue, index?, array?), thisArg?)
+                    </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [1]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: filter()</h2>
+                <ul>
+                    <li>Returns a new array</li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>find()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.find(fn(currentValue, index?, array?), thisArg?)
+            </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [2]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: find()</h2>
+                <ul>
+                    <li>Returns the first match (only)</li>
+                    <li>Iteration aborts after the first match</li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>some()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.some(fn(currentValue, index?, array?), thisArg?)
+            </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [3]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: some()</h2>
+                <ul>
+                    <li>Strange naming for <i>match-any</i></li>
+                    <li>Iteration aborts after the first match</li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>every()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.every(fn(currentValue, index?, array?), thisArg?)
+            </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [4]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: every()</h2>
+                <ul>
+                    <li>Strange naming for <i>match-all</i></li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>map()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.map(fn(currentValue, index?, array?), thisArg?)
+            </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [5]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: map()</h2>
+                <ul>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>flatMap()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.flatMap(fn(currentValue, index?, array?), thisArg?)
+                </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>thisArg?</b> - the element <i>this</i> is bound to<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [6]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: flatMap()</h2>
+                <ul>
+                    <li>Supported in modern browsers</li>
+                    <li>Combination of flat() and map()</li>
+                    <li>Only for very special use-cases</li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>reduce()</h2>
+                <pre><code class="hljs javascript" data-trim data-noescape>
+                array.reduce(
+                    fn(accumulator, currentValue, index?, array?),
+                    initialValue?)
+            </code></pre>
+                <p>
+                    <b>callback</b> - the function used for testing<br>
+                    <b>accumulator</b> - the result of the reducer<br>
+                    <b>currentValue</b> - the element under test<br>
+                    <b>index?</b> - the index of the element under test<br>
+                    <b>array?</b> - the array being tested<br>
+                    <b>initialValue?</b> - the value to start the reduction with<br>
+                </p>
+                <a href="https://codesandbox.io/s/01nx4kp6n0%20/" target="_blank">Exercises [7-9, 10 optional]</a>
+            </section>
+            <section>
+                <h2>Wrap-Up: reduce()</h2>
+                <ul>
+                    <li>Very versatile and powerful</li>
+                    <li>Use Cases: collect, aggregate, tally, group, pipeline</li>
+                    <li>Very little code to write</li>
+                    <li>Not so simple anymore</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Array Functions: Wrap-Up</h2>
+                <ul>
+                    <li>Very powerful</li>
+                    <li>Very little code to write</li>
+                    <li>Very simple to write tests for</li>
+                    <li>Very simple to use</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Array Functions: Continued ...</h2>
+                <ul class="grid">
+                    <li>reduceRight(...)</li>
+                    <li>findIndex(...)</li>
+                    <li>sort(...)</li>
+                    <li>copyWithin(...)</li>
+                    <li>splice(...)</li>
+                    <li>slice(...)</li>
+                    <li>fill(...)</li>
+                    <li>...</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Array Functions: More ...</h2>
+                <p>Check out and get familiar with the full <a href="https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array" target="_blank">Array API</a> !</p>
+                <p>There is more coming soon => ES.Next</p>
+            </section>
+        </section>
+
+        <section>
+            <h2>Resources</h2>
+            <ul>
+                <li>
+                    <a href="https://github.com/getify/functional-light-js" target="_blank">Functional-Light JavaScript</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="deck-slide">
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../js/reveal.js"></script>
+
+<script>
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    history: true,
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../plugin/markdown/marked.js' },
+      { src: '../plugin/markdown/markdown.js' },
+      { src: '../plugin/notes/notes.js', async: true },
+      {
+        src: '../plugin/highlight/highlight.js', async: true, callback: function () {
+          hljs.initHighlightingOnLoad();
+        },
+      },
+    ],
+  });
+</script>
+</body>
+</html>
