@@ -1021,10 +1021,12 @@
                         const originalArray = [1, 2, 3, 4];
                         const shallowCopyArray = [...originalArray];
                         const extendedArray = [-1, 0, ...originalArray];
+                        // [-1, 0, 1, 2, 3, 4]
 
                         const originalObject = { a: 1, b: 2 };
                         const shallowCopyObject = { ... originalObject };
                         const extendedObject = { ...originalObject, c: 3 };
+                        // { a: 1, b: 2, c: 3 }
                     </code>
                 </pre>
             </section>
