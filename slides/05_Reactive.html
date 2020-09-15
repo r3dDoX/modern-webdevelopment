@@ -234,7 +234,7 @@
                 </ul>
             </section>
             <section>
-                <h2>Memory Leaks Solution</h2>
+                <h2>Memory Leaks Solution #1</h2>
                 <pre>
                     <code class="hljs typescript" data-trim>
                         this.subscription = this.nonFinishingObservable
@@ -242,6 +242,16 @@
 
                         // onDestroy
                         this.subscription?.unsubscribe();
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>Memory Leaks Solution #2</h2>
+                <pre>
+                    <code class="hljs typescript" data-trim>
+                        this.nonFinishingObservable
+                            .pipe(first())
+                            .subscribe(result => this.result = result);
                     </code>
                 </pre>
             </section>
